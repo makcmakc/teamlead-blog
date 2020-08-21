@@ -1,29 +1,33 @@
 <template>
-  <div class="card">
-    <div class="card-content">
-      <div class="media">
-        <div class="media-left">
-          <figure class="image is-48x48">
-            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-          </figure>
+  <div class="section">
+    <div v-if="posts.length">
+      <div 
+        v-for="post in posts"
+        :key="post.id"
+        class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-4">{{ post.title }}</p>
+            </div>      
+          </div>
+          <div class="content">
+            {{ post.description }}
+          </div>
+          
+          <div class="buttons">
+            <p>{{ post.createdAt }}</p>
+            <b-button icon-left="file-document-edit-outline" type="is-light">Изменить</b-button>
+            <b-button icon-left="delete" type="is-light">Удалить</b-button>
+
+<!--             <b-button icon-left="hand-okay" type="is-light">28</b-button> -->
+          </div>
         </div>
-        <div class="media-content">
-          <p class="title is-4">John Smith</p>
-          <p class="subtitle is-6">@johnsmith</p>
-        </div>      
       </div>
-      <div class="content">
-        Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Мир страна осталось его безорфографичный одна дорогу строчка, жаренные переписали составитель вскоре единственное по всей они на берегу, даже переписывается, моей родного не раз несколько даль всеми он, залетают маленький вопроса. Семь.
-      </div>
-      
-      <div class="buttons">
-        <b-button icon-left="file-document-edit-outline" type="is-light">Изменить</b-button>
-        <b-button icon-left="delete" type="is-light">Удалить</b-button>
-
-        <b-button icon-left="hand-okay" type="is-light">28</b-button>
-      </div>
-
     </div>
+
+    <p v-else class="subtitle is-4">Пока нет постов...</p>
+
   </div>
 </template>
 
@@ -34,7 +38,11 @@
       return {}
     },
     methods: {},
-    computed: {},
+    computed: {
+      posts() {
+        return this.$store.getters.posts
+      }
+    },
     mounted() {}
   }
 </script>
@@ -42,3 +50,4 @@
 <style>
 
 </style>
+
